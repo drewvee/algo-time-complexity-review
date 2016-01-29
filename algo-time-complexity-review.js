@@ -1,10 +1,10 @@
 /////////// Prompt 1 ///////////
-/////////// time complexity: 
+/////////// time complexity: O(n)
 function findMax(array){
   var max = -Infinity;
-  for (var i = 0; i < array.length; i++){
-    if (array[i] > max){
-      max = array[i];
+  for (var i = 0; i < array.length; i++){   //n
+    if (array[i] > max){                    //1
+      max = array[i];                       //1   = 2n
     }
   }
   return max; 
@@ -12,54 +12,79 @@ function findMax(array){
 
 
 /////////// Prompt 2 ///////////
-/////////// time complexity: 
+/////////// time complexity: O(n)
+  // Array.prototype.indexOf() method returns the first index at which a given
+  // element can be found in the array, or -1 if not present
+  
 function contains(array, target){
-  return array.indexOf(target) > -1;
+  return array.indexOf(target) > -1; // iterating over the entire array to check against target, so n
 }
 
 
 /////////// Prompt 3 ///////////
-/////////// time complexity: 
+/////////// time complexity: O(n)
 function partialContains(array, target, start){
-  return array.slice(start).indexOf(target) > -1;
+  return array.slice(start).indexOf(target) > -1; // .slice(start) 1
+                                                  // indexOf() n, so 1n
 }
+
+/*
+var indices = [];
+var arr = ['a', 'b', 'a', 'c', 'a', 'd'];
+var elem = 'a';
+var idx = arr.indexOf(elem);
+
+for(var i = 0; i < arr.length; i++) {   
+  if(arr[i] === idx) {
+  
+    indices.push(idx);
+  }
+} 
+
+while (idx != -1) {
+  indices.push(idx);
+  idx = arr.indexOf(elem, idx + 1);
+}
+console.log(indices); // [0, 2, 4]
+*/
+
 
 
 /////////// Prompt 4 ///////////
-/////////// time complexity: 
+/////////// time complexity: O(n)
 function square(array){
-  for (var i = 0; i < 3; i++){
-    array[i] = array[i] * array[i];
+  for (var i = 0; i < 3; i++){        // n  = 1n
+    array[i] = array[i] * array[i];   // 1  
   }
   return array;
 }
 
 /////////// Prompt 5 ///////////
-/////////// time complexity: 
+/////////// time complexity: O(n^2) 
 function repeat(array){
   var repeat = [];
-  for (var j = 0; j < 10; j++){
-    repeat[j] = [];
-    for (var i = 0; i < array.length; i++){
-      repeat[j].push(array[i]);
+  for (var j = 0; j < 10; j++){               // n  = 1n    = 1n * 1n   =n^2
+    repeat[j] = [];                           // 1
+    for (var i = 0; i < array.length; i++){   // n  = 1n
+      repeat[j].push(array[i]);               // 1
     }
   }
   return repeat; 
 }
-//what if we replace 10 with a parameter? 
+//what if we replace 10 with a parameter?     // if param means variable, should not effect n complexity
 
 
 /////////// Prompt 6 ///////////
-/////////// time complexity: 
+/////////// time complexity: O(n)
 function gcf(num1, num2){
-  if (num1 > num2){ //this ensures num1 is the smaller number
-    var temp = num1;
-    num1 = num2;
-    num2 = temp;
+  if (num1 > num2){ //this ensures num1 is the smaller number   
+    var temp = num1;                                            // 1    = 3 * 1n    = 3n
+    num1 = num2;                                                // 1
+    num2 = temp;                                                // 1
   }
-  for (var i = num1; i > 1; i--){
-    if (num1 % i === 0 && num2 % i === 0){
-      return i;
+  for (var i = num1; i > 1; i--){                               // n    = 1n
+    if (num1 % i === 0 && num2 % i === 0){                      
+      return i;                                                 // 1
     }
   }
   return 1;
@@ -67,20 +92,20 @@ function gcf(num1, num2){
 
 
 /////////// Prompt 7 ///////////
-/////////// time complexity: 
+/////////// time complexity: O(n^2)
 function countChar(string){
-  var counts = {};
+  var counts = {};                                
   var currChar, currCharCount;
-  for (var i = 0; i < string.length; i++){
-    currChar = string[i];
-    currCharCount = 1;
-    for (var j = i+1; j < string.length; j++){
-      if (currChar === string[j]){
-        currCharCount++;
+  for (var i = 0; i < string.length; i++){        // n    = 3n    = 3n    //slides answer 3n + 1/2(n^2 - n)?
+    currChar = string[i];                         // 1
+    currCharCount = 1;                            // 1
+    for (var j = i+1; j < string.length; j++){    // n    = 1*n
+      if (currChar === string[j]){          
+        currCharCount++;                          // 1
       }
     }
-    if (!counts.hasOwnProperty(currChar)){
-      counts[currChar] = currCharCount;
+    if (!counts.hasOwnProperty(currChar)){        
+      counts[currChar] = currCharCount;           // 1
     }
   }
   return counts;
@@ -91,19 +116,19 @@ function countChar(string){
 /////////// time complexity: 
 var factorial = function(num){
   if (num < 0){
-    return;
+    return;                             // 1 
   }
   if (num === 0 || num === 1){
-    return 1; 
+    return 1;                           // 1
   } else {
-    return num * factorial(num-1);
+    return num * factorial(num-1);      // recurses back up so 2^n?
   }
 }
 
 
 /////////// Prompt 9 ///////////
-/////////// time complexity: 
-function tournament(players){
+/////////// time complexity: O(log n)  
+function tournament(players){                               // from the slides, diagram is logarithmic 
   var results;
   if (players.length < 3){
     return players[0];
